@@ -36,6 +36,11 @@ namespace BlinkyHeadlessCpp
 
 	private:
 		void InitGpio();
+		concurrency::task<void> InitI2C();
+		void I2CStartTimer();
+		void write8(uint8,uint8);
+		int initLight = 0;
+
 	private:
 		Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> Deferral;
 		Windows::ApplicationModel::Background::IBackgroundTaskInstance^ TaskInstance;
@@ -47,6 +52,6 @@ namespace BlinkyHeadlessCpp
 		Windows::Devices::Gpio::GpioPin ^pin;
 		Windows::Devices::Gpio::GpioPin ^Inpin;
 		void pinValueChangedEventHandler(_In_ Windows::Devices::Gpio::GpioPin^ pinInputValue, _In_ Windows::Devices::Gpio::GpioPinValueChangedEventArgs^ eventArgs);
-
+		Windows::Devices::I2c::I2cDevice^ BMP280Sensor;
     };
 }
